@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace MyApp
 {
@@ -109,7 +110,9 @@ namespace MyApp
             Console.WriteLine("Liste des communes créées:");
             foreach(Commune c in listcommunes)
             {
-                string nb = string.Format("{0:N0}", c.NbHab);
+                var culture = CultureInfo.GetCultureInfo("en-GB");
+                string nb = string.Format(culture,"{0:n0}", c.NbHab);
+                nb = nb.Replace(",", ".");
                 string message_p1 = "Nom: " + c.Nom + " Code Postal: " + c.CodePost;
                 string message_p2 = "Nombre d'habitants: " + nb;
                 Console.WriteLine(message_p1);
@@ -124,7 +127,9 @@ namespace MyApp
             {
                 Nbtot = Nbtot + c.NbHab;
             }
-            string nb = string.Format("{0:N0}", Nbtot);
+            var culture = CultureInfo.GetCultureInfo("en-GB");
+            string nb = string.Format(culture,"{0:n0}", Nbtot);
+            nb = nb.Replace(",", ".");
             string message = "Nombre total d'habitants: " + nb;        
             Console.WriteLine(message);
         }
