@@ -22,6 +22,10 @@ namespace MyApp
                 {
                     affiche(listcommune);
                 }
+                else if(choix == "3")
+                {
+                    calculNbtotalHabs(listcommune);
+                }
                 else if(choix == "Q" || choix == "q")
                 {
                     break;
@@ -39,6 +43,7 @@ namespace MyApp
             Console.WriteLine("Que voulez-vous faire");
             Console.WriteLine("1.Créer une nouvelle communes");
             Console.WriteLine("2.Afficher l'ensemble des communes");
+            Console.WriteLine("3.Afficher le nombre total d'habitants");
             Console.WriteLine("Q.Quitter");
             string choix = Console.ReadLine();
             return choix;
@@ -109,6 +114,17 @@ namespace MyApp
                 Console.WriteLine(message_p1);
                 Console.WriteLine(message_p2);
             }
-        }        
+        }
+        
+        public static void calculNbtotalHabs(List<Commune> listcommunes)
+        {
+            int Nbtot = 0;
+            foreach(Commune c in listcommunes)
+            {
+                Nbtot = Nbtot + c.NbHab;
+            }
+            string message = "Nombre total d'habitants: " + Nbtot;
+            Console.WriteLine(message);
+        }
     }
 }
