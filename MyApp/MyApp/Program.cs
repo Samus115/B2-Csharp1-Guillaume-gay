@@ -109,8 +109,9 @@ namespace MyApp
             Console.WriteLine("Liste des communes créées:");
             foreach(Commune c in listcommunes)
             {
+                string nb = string.Format("{0:#,0}", c.NbHab);
                 string message_p1 = "Nom: " + c.Nom + " Code Postal: " + c.CodePost;
-                string message_p2 = "Nombre d'habitants: " + c.NbHab;
+                string message_p2 = "Nombre d'habitants: " + nb;
                 Console.WriteLine(message_p1);
                 Console.WriteLine(message_p2);
             }
@@ -123,7 +124,8 @@ namespace MyApp
             {
                 Nbtot = Nbtot + c.NbHab;
             }
-            string message = "Nombre total d'habitants: " + Nbtot;
+            string nb = string.Format("{0:0,0}", Nbtot);
+            string message = "Nombre total d'habitants: " + nb;        
             Console.WriteLine(message);
         }
     }
