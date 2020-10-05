@@ -71,6 +71,12 @@ namespace MyApp
         {
             Console.WriteLine(message);
             string Nom = Console.ReadLine();
+            while (string.IsNullOrEmpty(Prenom))
+            {
+                Console.WriteLine("Veuillez saisir quelque chose");
+                Nom = Console.ReadLine();
+            }
+
             return Nom;
         }
 
