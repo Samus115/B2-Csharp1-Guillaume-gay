@@ -20,18 +20,17 @@ namespace MyApp
                 }
                 else if(choix == "2")
                 {
-
+                    affiche(listcommune);
                 }
-                else if(choix == "q")
-                {
-
-                }
-                else
+                else if(choix == "Q" || choix == "q")
                 {
                     break;
                 }
-            }
-
+                else
+                {
+                    Console.WriteLine("Je n'ai pas compris"); 
+                }
+            }       
         }
 
         public static string Menu()
@@ -40,7 +39,7 @@ namespace MyApp
             Console.WriteLine("Que voulez-vous faire");
             Console.WriteLine("1.Créer une nouvelle communes");
             Console.WriteLine("2.Afficher l'ensemble des communes");
-            Console.WriteLine("q.Quitter");
+            Console.WriteLine("Q.Quitter");
             string choix = Console.ReadLine();
             return choix;
         }
@@ -74,5 +73,17 @@ namespace MyApp
             string Nom = Console.ReadLine();
             return Nom;
         }
+
+        public static void affiche(List<Commune> listcommunes)
+        {
+            Console.WriteLine("Liste des communes créées:");
+            foreach(Commune c in listcommunes)
+            {
+                string message_p1 = "Nom: " + c.Nom + " Code Postal: " + c.CodePost;
+                string message_p2 = "Nombre d'habitants: " + c.NbHab;
+                Console.WriteLine(message_p1);
+                Console.WriteLine(message_p2);
+            }
+        }        
     }
 }
