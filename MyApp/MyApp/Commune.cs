@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MyApp
 {
-    class Commune
+   public class Commune
     {
         public string Nom;
         public int CodePost;

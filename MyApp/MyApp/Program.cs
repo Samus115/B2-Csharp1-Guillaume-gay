@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using MyApp.Services;
 
 namespace MyApp
 {
     class Program
     {
+        private static DemandeALutilisateur _DemandeALutilisateur = new DemandeALutilisateur();
+        private static CommuneService _communeService = new CommuneService(_DemandeALutilisateur);
+
         static void Main(string[] args)
         {
             List<Commune> listcommune = new List<Commune>();
@@ -16,16 +20,16 @@ namespace MyApp
 
                 if(choix == "1")
                 {
-                   Commune c = ajouterCommune();
+                   Commune c = _communeService.ajouterCommune();
                     listcommune.Add(c);
                 }
                 else if(choix == "2")
                 {
-                    affiche(listcommune);
+                    _communeService.affiche(listcommune);
                 }
                 else if(choix == "3")
                 {
-                    calculNbtotalHabs(listcommune);
+                    _communeService.calculNbtotalHabs(listcommune);
                 }
                 else if(choix == "Q" || choix == "q")
                 {
@@ -48,90 +52,6 @@ namespace MyApp
             Console.WriteLine("Q.Quitter");
             string choix = Console.ReadLine();
             return choix;
-        }
-
-        public static Commune ajouterCommune()
-        {
-            Commune c = new Commune();
-            c.Nom = saisieNom("Quel est le nom de votre ville ?");
-            c.CodePost = saisieEntier("Quel est de code postal ?");
-            c.NbHab = saisieEntier("Combie y a-t-il d'habitants ?");
-
-            return c;
-        }
-
-        public static int saisieEntier(string message)
-        {
-            int valeurconvertie;
-            Console.WriteLine(message);
-            string entier = Console.ReadLine();
-
-            while(!int.TryParse(entier, out valeurconvertie))
-            {
-                Console.WriteLine("Veuillez saisir un entier correcte");
-                entier = Console.ReadLine();
-            }
-            return valeurconvertie;
-        }
-        public static string saisieNom(string message)
-        {
-            Console.WriteLine(message);
-            string Nom = Console.ReadLine();
-            bool ok = false;
-            int valeurconvertie;
-            
-            while(ok == false)
-            {
-                if (string.IsNullOrEmpty(Nom))
-                {
-                    Console.WriteLine("Saisie incorrecte: veuillez saisir quelque chose");
-                    Nom = Console.ReadLine();
-                }
-                else if (int.TryParse(Nom, out valeurconvertie))
-                {
-                    Console.WriteLine("Saisie incorrecte: le nom de votre ville ne peut pas être un nombre");
-                    Nom = Console.ReadLine();
-                }
-                else if ( Nom[0] < 65 || Nom[0] > 90)
-                {
-                    Console.WriteLine("Saisie incorrecte: veuillez commencer le nom de votre commune par une majuscule");
-                    Nom = Console.ReadLine();
-                }
-                else
-                {
-                    ok = true;
-                }
-            }
-            return Nom;
-        }
-
-        public static void affiche(List<Commune> listcommunes)
-        {
-            Console.WriteLine("Liste des communes créées:");
-            foreach(Commune c in listcommunes)
-            {
-                var culture = CultureInfo.GetCultureInfo("en-GB");
-                string nb = string.Format(culture,"{0:n0}", c.NbHab);
-                nb = nb.Replace(",", ".");
-                string message_p1 = "Nom: " + c.Nom + " Code Postal: " + c.CodePost;
-                string message_p2 = "Nombre d'habitants: " + nb;
-                Console.WriteLine(message_p1);
-                Console.WriteLine(message_p2);
-            }
-        }
-        
-        public static void calculNbtotalHabs(List<Commune> listcommunes)
-        {
-            int Nbtot = 0;
-            foreach (Commune c in listcommunes)
-            {
-                Nbtot = Nbtot + c.NbHab;
-            }
-            var culture = CultureInfo.GetCultureInfo("en-GB");
-            string nb = string.Format(culture,"{0:n0}", Nbtot);
-            nb = nb.Replace(",", ".");
-            string message = "Nombre total d'habitants: " + nb;        
-            Console.WriteLine(message);
         }
     }
 }
