@@ -38,6 +38,10 @@ namespace MyApp
                 {
                     _deptServices.afficheDept();
                 }
+                else if(choix == "6")
+                {
+                    _deptServices.CalculNbHabDept();
+                }
                 else if(choix == "Q" || choix == "q")
                 {
                     break;
@@ -57,6 +61,7 @@ namespace MyApp
             Console.WriteLine("3.Afficher le nombre total d'habitants");
             Console.WriteLine("4.Ajouter un Departement");
             Console.WriteLine("5.Afficher les departements");
+            Console.WriteLine("6.Calculer le nombre d'habitante d'un departement");
             Console.WriteLine("Q.Quitter");
             string choix = Console.ReadLine();
             return choix;
