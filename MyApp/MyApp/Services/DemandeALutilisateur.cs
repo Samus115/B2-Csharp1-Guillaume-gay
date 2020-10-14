@@ -22,12 +22,12 @@ namespace MyApp.Services
                 }
                 else if (int.TryParse(Nom, out valeurconvertie))
                 {
-                    Console.WriteLine("Saisie incorrecte: le nom de votre ville ne peut pas être un nombre");
+                    Console.WriteLine("Saisie incorrecte: le nom ne peut pas être un nombre");
                     Nom = Console.ReadLine();
                 }
                 else if (Nom[0] < 65 || Nom[0] > 90)
                 {
-                    Console.WriteLine("Saisie incorrecte: veuillez commencer le nom de votre commune par une majuscule");
+                    Console.WriteLine("Saisie incorrecte: veuillez commencer le nom par une majuscule");
                     Nom = Console.ReadLine();
                 }
                 else
@@ -51,7 +51,7 @@ namespace MyApp.Services
                     Console.WriteLine("Veuillez saisir un entier correcte");
                     entier = Console.ReadLine();
                 }
-                else if (valeurconvertie<0)
+                else if (valeurconvertie<1)
                 {
                     Console.WriteLine("Veuillez saisir un entier positif");
                     entier = Console.ReadLine();
