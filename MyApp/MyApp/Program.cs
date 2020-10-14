@@ -13,8 +13,6 @@ namespace MyApp
         private static DepartementServices _deptServices = new DepartementServices(_DemandeALutilisateur);
         static void Main(string[] args)
         {
-            List<Commune> listcommune = new List<Commune>();
-            List<Departement> listdept = new List<Departement>();
 
             while (true)
             {
@@ -22,25 +20,23 @@ namespace MyApp
 
                 if(choix == "1")
                 {
-                   Commune c = _communeService.ajouterCommune();
-                    listcommune.Add(c);
+                   Commune c = _communeService.ajouterCommune(_deptServices.listdept);
                 }
                 else if(choix == "2")
                 {
-                    _communeService.affiche(listcommune);
+                    _communeService.affiche(_communeService.listcommunes);
                 }
                 else if(choix == "3")
                 {
-                    _communeService.calculNbtotalHabs(listcommune);
+                    _communeService.calculNbtotalHabs(_communeService.listcommunes);
                 }
                 else if(choix == "4")
                 {
-                    Departement d = _deptServices.ajouterDepartement();
-                    listdept.Add(d);
+                    Departement d = _deptServices.ajouterDepartement(_communeService.listcommunes);
                 }
                 else if(choix == "5")
                 {
-                    _deptServices.afficheDept(listdept);
+                    _deptServices.afficheDept();
                 }
                 else if(choix == "Q" || choix == "q")
                 {

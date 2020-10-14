@@ -8,5 +8,7 @@ namespace MyApp.Models
     {
         public int code;
         public string nom;
-    }
+
+        public List<Commune> Communes { get; set; }
+    }   
 }

@@ -10,18 +10,28 @@ namespace MyApp.Services
     {
 
         private DemandeALutilisateur _demandeALutilisateur;
+        public List<Commune> listcommunes = new List<Commune>();
 
         public CommuneService(DemandeALutilisateur demandealutilisateur)
         {
             this._demandeALutilisateur = demandealutilisateur;
         }
-        public Commune ajouterCommune()
+        public Commune ajouterCommune(List<Departement> listdept)
         {
             Commune c = new Commune();
             c.Nom = _demandeALutilisateur.saisieNom("Quel est le nom de votre ville ?");
             c.CodePost = _demandeALutilisateur.saisieEntier("Quel est de code postal ?");
             c.NbHab = _demandeALutilisateur.saisieEntier("Combie y a-t-il d'habitants ?");
 
+            foreach(Departement d in listdept)
+            {
+                if(d.code == c.CodePost)
+                {
+                    c.NomDept = d.nom;
+                    d.Communes.Add(c);
+                }
+            }
+            listcommunes.Add(c);
             return c;
         }
 
@@ -51,6 +61,8 @@ namespace MyApp.Services
                 string message_p2 = "Nombre d'habitants: " + nb;
                 Console.WriteLine(message_p1);
                 Console.WriteLine(message_p2);
+                string message_3 = "Departement: " + c.NomDept;
+                Console.WriteLine(message_3);
             }
         }
     }

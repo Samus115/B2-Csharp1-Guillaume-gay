@@ -9,5 +9,6 @@ namespace MyApp.Models
         public string Nom;
         public int CodePost;
         public int NbHab;
+        public string NomDept;
     }
 }
